@@ -2,13 +2,18 @@ spring:
   application:
     name: "configserver"
   profiles:
-    active: native
+    active: git
   cloud:
     config: 
       server:
-        native:
+        git:
+          uri: "https://github.com/ZevaGuillo/zevaguillo-ms-config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+        # native:
           #search-locations: "classpath:/config"
-          search-locations: "file:///D://Guillermo//SPRING//config"
-
+          # search-locations: "file:///D://Guillermo//SPRING//config"
 server:
   port: 8071
