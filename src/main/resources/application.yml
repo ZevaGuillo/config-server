@@ -2,18 +2,46 @@ spring:
   application:
     name: "configserver"
   profiles:
+    # active: native
     active: git
   cloud:
     config: 
       server:
+        
+        # native:
+          #search-locations: "classpath:/config"
+          # search-locations: "file:///D://Guillermo//SPRING//config"
         git:
+          skipSslValidation: true
           uri: "https://github.com/ZevaGuillo/zevaguillo-ms-config.git"
           default-label: main
           timeout: 5
           clone-on-start: true
-          force-pull: true
-        # native:
-          #search-locations: "classpath:/config"
-          # search-locations: "file:///D://Guillermo//SPRING//config"
+
+  # rabbitmq:
+  #   host: "localhost"
+  #   port: 5672
+  #   username: "guest"
+  #   password: "guest"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true 
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+
+encrypt:
+  key: "2413b91978a61eafed88d49a154c59694ab705370757587b8f4b27b50f26266a"
+
 server:
   port: 8071
